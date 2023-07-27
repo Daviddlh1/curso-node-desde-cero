@@ -13,9 +13,13 @@ function findAvailablePort(desiredPort) {
 
         server.on('error', (err) => {
             if(err.code === 'EADDRINUSE') {
-                findAvailablePort(0).then(port => rel)
+                findAvailablePort(0).then(port => resolve(port))
+            } else {
+                reject(err)
             }
         })
     })
 
 }
+
+module.exports = { findAvailablePort }
